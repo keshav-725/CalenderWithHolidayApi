@@ -43,6 +43,9 @@ public class CalenderController {
 
 	@Value("${holiday.api.url}")
 	private String API_URL;
+	
+	@Value("${holiday.api.key}")
+	private String API_KEY;
 
 	@GetMapping("/{year}/{month}")
 	public ResponseEntity<Map<String, Object>> getCalendar(@PathVariable int year, @PathVariable int month, @RequestParam(required = false) String type,@RequestParam(required = false) String country) {
@@ -79,7 +82,7 @@ public class CalenderController {
 				url = url + "&type=" + type;
 			}
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("X-Api-Key","YOUR_API_KEY");
+			headers.set("X-Api-Key",API_KEY);
 			HttpEntity<String> entity = new HttpEntity<>("body", headers);
 			ResponseEntity<String> apiResponse;
 			try {
